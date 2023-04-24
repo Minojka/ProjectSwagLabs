@@ -16,14 +16,26 @@ public class InventoryTest extends BaseTest{
         inventoryPage = new InventoryPage(driver);
     }
 
-    @Test
-    public void Add3ItemsInCart(){
-        loginPage.LoginWithValidData();
+    @Test //2. a)
+    public void Add3CheapestProductsInCart(){
+        loginPage.Login("standard_user", "secret_sauce");
         inventoryPage.SortItemByValue();
         inventoryPage.AddOnesie();
         inventoryPage.AddBikeLight();
         inventoryPage.AddTShirt();
         Assert.assertEquals(inventoryPage.Cart(),"3");
+    }
+    @Test //2. b)
+    public void Add2ProductsAndRemove(){
+        loginPage.Login("standard_user", "secret_sauce");
+        inventoryPage.AddBikeLight();
+        inventoryPage.AddOnesie();
+        inventoryPage.ClickOnCart();
+        inventoryPage.RemoveBikeLight();
+        inventoryPage.RemoveOnesie();
+        inventoryPage.ClickOnContinueShopping();
+        Assert.assertEquals(inventoryPage.visibleBikeLight.isDisplayed(),true);
+        Assert.assertEquals(inventoryPage.visibleOnesie.isDisplayed(), true);
     }
     @AfterMethod
     public  void After(){

@@ -14,7 +14,7 @@ public class LoginPage extends BasePage{
     @FindBy (id = "login-button")
     WebElement loginButton;
 
-    @FindBy(css=".error-message-container h3")
+    @FindBy(css = ".error-message-container h3")
     WebElement errorMessage;
 
 
@@ -22,34 +22,13 @@ public class LoginPage extends BasePage{
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+    public void Login(String user,String pass){
+        userName.sendKeys(user);
+        password.sendKeys(pass);
+        loginButton.click();
+    }
     public String getTextMessage() {
         return errorMessage.getText();
-    }
-    public void LoginWithValidData(){
-        userName.sendKeys("standard_user");
-        password.sendKeys("secret_sauce");
-        loginButton.click();
-    }
-    public void LoginWithWrongUserName(){
-        userName.sendKeys("standarduser");
-        password.sendKeys("secret_sauce" );
-        loginButton.click();
-    }
-    public void LoginWithWrongPassword(){
-        userName.sendKeys("standard_user");
-        password.sendKeys("secretsauce" );
-        loginButton.click();
-    }
-    public void LoginWithWrongUserAndPass(){
-        userName.sendKeys("standarduser");
-        password.sendKeys("secretsauce" );
-        loginButton.click();
-    }
-    public void LoginWithEmptyUserAndPass(){
-        userName.sendKeys("");
-        password.sendKeys("");
-        loginButton.click();
-
     }
 
 }
